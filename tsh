@@ -17,6 +17,9 @@ __license__ = 'GNU GPL 2'
 __version__ = '0.02'
 
 import sys, os, os.path, glob, re
+import datetime
+import time
+from pwd import getpwnam
 
 # The variables can be changed by the command line options:
 VERBOSE = False
@@ -26,6 +29,15 @@ CONFIG = 'tsh.conf'
 
 allowExec = []
 allowSubShell = False
+
+def date():
+    datetime = time.strftime('%Y%m%d%H%M%S')
+    print 'Date&Time:', datetime
+
+def ud():
+    
+    print 'UserID  is:', getpwnam('user').pw_uid
+    print 'GroupID is:', os.getgid()
 
 def readConfig():
     if os.access(CONFIG, os.R_OK):
@@ -240,6 +252,14 @@ def repl():
             if ('ifconfig' == cmd):
                 line = ''
                 print('invalid command')
+            if ('dt' == cmd):
+                date()
+            if ('date' == cmd):
+                line = ''
+                print('invalid command')
+            if ('ud' == cmd):
+                ud()
+
         except EOFError:
             print 'exit'
             break
