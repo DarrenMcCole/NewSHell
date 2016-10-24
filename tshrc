@@ -8,7 +8,6 @@ alias l='ls -l'
 alias cd..='cd ..'
 
 alias pw='pwd'
-alias dt='date +%Y%m%d%H%M%S'
 alias ifc='ifconfig'
 
 

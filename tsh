@@ -1,20 +1,5 @@
 #!/usr/bin/env python
-"""Usage:  tsh [options] [file]
 
-Options:
-
-    -h  --help      print this text and exit.
-    
-    -t  --test      perform some tests and exit.
-    
-    -v  --verbose   be verbose (mostly for debugging).
-
-        --version   print version number and exit.
-"""
-__author__ = 'Ilan Schnell <ilanschnell@gmail.com>'
-__copyright__ = '(c) Ilan Schnell, 2007'
-__license__ = 'GNU GPL 2'
-__version__ = '0.02'
 
 import sys, os, os.path, glob, re
 import datetime
@@ -30,12 +15,12 @@ CONFIG = 'tsh.conf'
 allowExec = []
 allowSubShell = False
 
+#date function for internal command
 def date():
     datetime = time.strftime('%Y%m%d%H%M%S')
     print 'Date&Time:', datetime
-
+#ud function for internal command
 def ud():
-    
     print 'UserID  is:', getpwnam('user').pw_uid
     print 'GroupID is:', os.getgid()
 
@@ -237,7 +222,8 @@ def repl():
             if has_readline and historyFile:
                 readline.write_history_file(historyFile)
             line = line.strip()
-            cmd, args = lineSplit(line) 
+            cmd, args = lineSplit(line)
+#below are if statements that execute the internal and external commands 
             if ('pw' == cmd):
                line = 'pwd'
                args = ''
@@ -253,11 +239,13 @@ def repl():
                 line = ''
                 print('invalid command')
             if ('dt' == cmd):
+                line = ''
                 date()
             if ('date' == cmd):
                 line = ''
                 print('invalid command')
             if ('ud' == cmd):
+                line = ''
                 ud()
 
         except EOFError:
