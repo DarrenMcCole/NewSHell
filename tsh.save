@@ -22,7 +22,7 @@ import sys, os, os.path, glob, re
 VERBOSE = False
 
 # Location of main configuration file:
-CONFIG = 'tsh.conf'
+CONFIG = '/home/user/darrenCode/tsh.conf'
 
 allowExec = []
 allowSubShell = False
@@ -212,7 +212,7 @@ def repl():
     
     shell = Shell()
 
-    rcFile = os.path.expanduser('.tshrc')
+    rcFile = os.path.expanduser('~/.tshrc')
     if os.access(rcFile, os.R_OK):
         shell.execute_file(rcFile)
     
@@ -224,22 +224,6 @@ def repl():
                 break
             if has_readline and historyFile:
                 readline.write_history_file(historyFile)
-            line = line.strip()
-            cmd, args = lineSplit(line) 
-            if ('pw' == cmd):
-               line = 'pwd'
-               args = ''
-            if ('pwd' == cmd):
-                line = ''
-                print('invalid command')
-            if ('ifc' == cmd):
-                if (args == ''):
-                   line = 'ifconfig eth0'
-                else:
-                   line = 'ifconfig ' + args 
-            if ('ifconfig' == cmd):
-                line = ''
-                print('invalid command')
         except EOFError:
             print 'exit'
             break
